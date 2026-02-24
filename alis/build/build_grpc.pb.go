@@ -20,9 +20,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BuildService_RetrieveMyWorkstation_FullMethodName = "/alis.build.BuildService/RetrieveMyWorkstation"
-	BuildService_GetBuildSpec_FullMethodName          = "/alis.build.BuildService/GetBuildSpec"
-	BuildService_ListBuildSpecs_FullMethodName        = "/alis.build.BuildService/ListBuildSpecs"
+	BuildService_RetrieveMyWorkstation_FullMethodName   = "/alis.build.BuildService/RetrieveMyWorkstation"
+	BuildService_GetWorkstationOperation_FullMethodName = "/alis.build.BuildService/GetWorkstationOperation"
+	BuildService_GetBuildSpec_FullMethodName            = "/alis.build.BuildService/GetBuildSpec"
+	BuildService_ListBuildSpecs_FullMethodName          = "/alis.build.BuildService/ListBuildSpecs"
 )
 
 // BuildServiceClient is the client API for BuildService service.
@@ -35,6 +36,8 @@ type BuildServiceClient interface {
 	// caller. If a workstation does not exist, it will provision one and then
 	// return with the one closest to the client.
 	RetrieveMyWorkstation(ctx context.Context, in *RetrieveMyWorkstationRequest, opts ...grpc.CallOption) (*longrunning.Operation, error)
+	// Retrieves the status of a workstation operation, e.g. for a RetrieveMyWorkstation request.
+	GetWorkstationOperation(ctx context.Context, in *longrunning.GetOperationRequest, opts ...grpc.CallOption) (*longrunning.Operation, error)
 	// Returns a build spec
 	GetBuildSpec(ctx context.Context, in *GetBuildSpecRequest, opts ...grpc.CallOption) (*BuildSpec, error)
 	// Lists build specs
@@ -53,6 +56,16 @@ func (c *buildServiceClient) RetrieveMyWorkstation(ctx context.Context, in *Retr
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(longrunning.Operation)
 	err := c.cc.Invoke(ctx, BuildService_RetrieveMyWorkstation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *buildServiceClient) GetWorkstationOperation(ctx context.Context, in *longrunning.GetOperationRequest, opts ...grpc.CallOption) (*longrunning.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(longrunning.Operation)
+	err := c.cc.Invoke(ctx, BuildService_GetWorkstationOperation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -89,6 +102,8 @@ type BuildServiceServer interface {
 	// caller. If a workstation does not exist, it will provision one and then
 	// return with the one closest to the client.
 	RetrieveMyWorkstation(context.Context, *RetrieveMyWorkstationRequest) (*longrunning.Operation, error)
+	// Retrieves the status of a workstation operation, e.g. for a RetrieveMyWorkstation request.
+	GetWorkstationOperation(context.Context, *longrunning.GetOperationRequest) (*longrunning.Operation, error)
 	// Returns a build spec
 	GetBuildSpec(context.Context, *GetBuildSpecRequest) (*BuildSpec, error)
 	// Lists build specs
@@ -105,6 +120,9 @@ type UnimplementedBuildServiceServer struct{}
 
 func (UnimplementedBuildServiceServer) RetrieveMyWorkstation(context.Context, *RetrieveMyWorkstationRequest) (*longrunning.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method RetrieveMyWorkstation not implemented")
+}
+func (UnimplementedBuildServiceServer) GetWorkstationOperation(context.Context, *longrunning.GetOperationRequest) (*longrunning.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetWorkstationOperation not implemented")
 }
 func (UnimplementedBuildServiceServer) GetBuildSpec(context.Context, *GetBuildSpecRequest) (*BuildSpec, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetBuildSpec not implemented")
@@ -147,6 +165,24 @@ func _BuildService_RetrieveMyWorkstation_Handler(srv interface{}, ctx context.Co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BuildServiceServer).RetrieveMyWorkstation(ctx, req.(*RetrieveMyWorkstationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BuildService_GetWorkstationOperation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(longrunning.GetOperationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BuildServiceServer).GetWorkstationOperation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BuildService_GetWorkstationOperation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BuildServiceServer).GetWorkstationOperation(ctx, req.(*longrunning.GetOperationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -197,6 +233,10 @@ var BuildService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RetrieveMyWorkstation",
 			Handler:    _BuildService_RetrieveMyWorkstation_Handler,
+		},
+		{
+			MethodName: "GetWorkstationOperation",
+			Handler:    _BuildService_GetWorkstationOperation_Handler,
 		},
 		{
 			MethodName: "GetBuildSpec",

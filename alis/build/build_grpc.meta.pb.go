@@ -3,13 +3,15 @@
 // Source: alis/build/build.proto
 // Plugin version: v0.0.1
 //
-// Generated on: 2026-02-24 15:29:53 UTC
+// Generated on: 2026-02-24 15:43:06 UTC
 
 package build
 
 const (
 	// BuildService_RetrieveMyWorkstation_FullMethodDescription returns the description of the alis.build.BuildService.RetrieveMyWorkstation method.
 	BuildService_RetrieveMyWorkstation_FullMethodDescription = "RetrieveMyWorkstation returns the relevant workstation beloning to the\n caller. If a workstation does not exist, it will provision one and then\n return with the one closest to the client."
+	// BuildService_GetWorkstationOperation_FullMethodDescription returns the description of the alis.build.BuildService.GetWorkstationOperation method.
+	BuildService_GetWorkstationOperation_FullMethodDescription = "Retrieves the status of a workstation operation, e.g. for a RetrieveMyWorkstation request."
 	// BuildService_GetBuildSpec_FullMethodDescription returns the description of the alis.build.BuildService.GetBuildSpec method.
 	BuildService_GetBuildSpec_FullMethodDescription = "Returns a build spec"
 	// BuildService_ListBuildSpecs_FullMethodDescription returns the description of the alis.build.BuildService.ListBuildSpecs method.

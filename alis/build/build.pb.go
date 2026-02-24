@@ -1046,9 +1046,10 @@ const file_alis_build_build_proto_rawDesc = "" +
 	"\rBuildSpecView\x12\x1f\n" +
 	"\x1bBUILD_SPEC_VIEW_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15BUILD_SPEC_VIEW_BASIC\x10\x01\x12\x18\n" +
-	"\x14BUILD_SPEC_VIEW_FULL\x10\x022\x97\x02\n" +
+	"\x14BUILD_SPEC_VIEW_FULL\x10\x022\xfc\x02\n" +
 	"\fBuildService\x12b\n" +
-	"\x15RetrieveMyWorkstation\x12(.alis.build.RetrieveMyWorkstationRequest\x1a\x1d.google.longrunning.Operation\"\x00\x12H\n" +
+	"\x15RetrieveMyWorkstation\x12(.alis.build.RetrieveMyWorkstationRequest\x1a\x1d.google.longrunning.Operation\"\x00\x12c\n" +
+	"\x17GetWorkstationOperation\x12'.google.longrunning.GetOperationRequest\x1a\x1d.google.longrunning.Operation\"\x00\x12H\n" +
 	"\fGetBuildSpec\x12\x1f.alis.build.GetBuildSpecRequest\x1a\x15.alis.build.BuildSpec\"\x00\x12Y\n" +
 	"\x0eListBuildSpecs\x12!.alis.build.ListBuildSpecsRequest\x1a\".alis.build.ListBuildSpecsResponse\"\x00B.Z,github.com/alis-exchange/build-go/alis/buildb\x06proto3"
 
@@ -1067,23 +1068,24 @@ func file_alis_build_build_proto_rawDescGZIP() []byte {
 var file_alis_build_build_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_alis_build_build_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_alis_build_build_proto_goTypes = []any{
-	(BuildSpecView)(0),                    // 0: alis.build.BuildSpecView
-	(BuildSpec_Status)(0),                 // 1: alis.build.BuildSpec.Status
-	(BuildSpec_Extension)(0),              // 2: alis.build.BuildSpec.Extension
-	(*RetrieveMyWorkstationRequest)(nil),  // 3: alis.build.RetrieveMyWorkstationRequest
-	(*RetrieveMyWorkstationMetadata)(nil), // 4: alis.build.RetrieveMyWorkstationMetadata
-	(*RetrieveMyWorkstationResponse)(nil), // 5: alis.build.RetrieveMyWorkstationResponse
-	(*BuildSpec)(nil),                     // 6: alis.build.BuildSpec
-	(*GetBuildSpecRequest)(nil),           // 7: alis.build.GetBuildSpecRequest
-	(*ListBuildSpecsRequest)(nil),         // 8: alis.build.ListBuildSpecsRequest
-	(*ListBuildSpecsResponse)(nil),        // 9: alis.build.ListBuildSpecsResponse
-	(*BuildSpec_Content)(nil),             // 10: alis.build.BuildSpec.Content
-	(*BuildSpec_Content_Specify)(nil),     // 11: alis.build.BuildSpec.Content.Specify
-	(*BuildSpec_Content_Plan)(nil),        // 12: alis.build.BuildSpec.Content.Plan
-	(*BuildSpec_Content_Tasks)(nil),       // 13: alis.build.BuildSpec.Content.Tasks
-	(*timestamppb.Timestamp)(nil),         // 14: google.protobuf.Timestamp
-	(*fieldmaskpb.FieldMask)(nil),         // 15: google.protobuf.FieldMask
-	(*longrunning.Operation)(nil),         // 16: google.longrunning.Operation
+	(BuildSpecView)(0),                      // 0: alis.build.BuildSpecView
+	(BuildSpec_Status)(0),                   // 1: alis.build.BuildSpec.Status
+	(BuildSpec_Extension)(0),                // 2: alis.build.BuildSpec.Extension
+	(*RetrieveMyWorkstationRequest)(nil),    // 3: alis.build.RetrieveMyWorkstationRequest
+	(*RetrieveMyWorkstationMetadata)(nil),   // 4: alis.build.RetrieveMyWorkstationMetadata
+	(*RetrieveMyWorkstationResponse)(nil),   // 5: alis.build.RetrieveMyWorkstationResponse
+	(*BuildSpec)(nil),                       // 6: alis.build.BuildSpec
+	(*GetBuildSpecRequest)(nil),             // 7: alis.build.GetBuildSpecRequest
+	(*ListBuildSpecsRequest)(nil),           // 8: alis.build.ListBuildSpecsRequest
+	(*ListBuildSpecsResponse)(nil),          // 9: alis.build.ListBuildSpecsResponse
+	(*BuildSpec_Content)(nil),               // 10: alis.build.BuildSpec.Content
+	(*BuildSpec_Content_Specify)(nil),       // 11: alis.build.BuildSpec.Content.Specify
+	(*BuildSpec_Content_Plan)(nil),          // 12: alis.build.BuildSpec.Content.Plan
+	(*BuildSpec_Content_Tasks)(nil),         // 13: alis.build.BuildSpec.Content.Tasks
+	(*timestamppb.Timestamp)(nil),           // 14: google.protobuf.Timestamp
+	(*fieldmaskpb.FieldMask)(nil),           // 15: google.protobuf.FieldMask
+	(*longrunning.GetOperationRequest)(nil), // 16: google.longrunning.GetOperationRequest
+	(*longrunning.Operation)(nil),           // 17: google.longrunning.Operation
 }
 var file_alis_build_build_proto_depIdxs = []int32{
 	1,  // 0: alis.build.BuildSpec.status:type_name -> alis.build.BuildSpec.Status
@@ -1101,13 +1103,15 @@ var file_alis_build_build_proto_depIdxs = []int32{
 	12, // 12: alis.build.BuildSpec.Content.plan:type_name -> alis.build.BuildSpec.Content.Plan
 	13, // 13: alis.build.BuildSpec.Content.tasks:type_name -> alis.build.BuildSpec.Content.Tasks
 	3,  // 14: alis.build.BuildService.RetrieveMyWorkstation:input_type -> alis.build.RetrieveMyWorkstationRequest
-	7,  // 15: alis.build.BuildService.GetBuildSpec:input_type -> alis.build.GetBuildSpecRequest
-	8,  // 16: alis.build.BuildService.ListBuildSpecs:input_type -> alis.build.ListBuildSpecsRequest
-	16, // 17: alis.build.BuildService.RetrieveMyWorkstation:output_type -> google.longrunning.Operation
-	6,  // 18: alis.build.BuildService.GetBuildSpec:output_type -> alis.build.BuildSpec
-	9,  // 19: alis.build.BuildService.ListBuildSpecs:output_type -> alis.build.ListBuildSpecsResponse
-	17, // [17:20] is the sub-list for method output_type
-	14, // [14:17] is the sub-list for method input_type
+	16, // 15: alis.build.BuildService.GetWorkstationOperation:input_type -> google.longrunning.GetOperationRequest
+	7,  // 16: alis.build.BuildService.GetBuildSpec:input_type -> alis.build.GetBuildSpecRequest
+	8,  // 17: alis.build.BuildService.ListBuildSpecs:input_type -> alis.build.ListBuildSpecsRequest
+	17, // 18: alis.build.BuildService.RetrieveMyWorkstation:output_type -> google.longrunning.Operation
+	17, // 19: alis.build.BuildService.GetWorkstationOperation:output_type -> google.longrunning.Operation
+	6,  // 20: alis.build.BuildService.GetBuildSpec:output_type -> alis.build.BuildSpec
+	9,  // 21: alis.build.BuildService.ListBuildSpecs:output_type -> alis.build.ListBuildSpecsResponse
+	18, // [18:22] is the sub-list for method output_type
+	14, // [14:18] is the sub-list for method input_type
 	14, // [14:14] is the sub-list for extension type_name
 	14, // [14:14] is the sub-list for extension extendee
 	0,  // [0:14] is the sub-list for field type_name
