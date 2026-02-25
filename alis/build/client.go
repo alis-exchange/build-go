@@ -1,11 +1,9 @@
 package build
 
 import (
-	context "context"
 	"crypto/tls"
 	"crypto/x509"
 
-	"go.alis.build/alog"
 	grpc "google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
@@ -13,14 +11,13 @@ import (
 const defaultHost = "gateway-build-v1-597696786316.europe-west1.run.app:443"
 
 // NewClient creates a new Ideate client.
-func NewClient(ctx context.Context) (BuildServiceClient, error) {
+func NewClient() (BuildServiceClient, error) {
 	maxSizeOptions := grpc.WithDefaultCallOptions(
 		grpc.MaxCallSendMsgSize(2_000_000_000),
 		grpc.MaxCallRecvMsgSize(2_000_000_000),
 	)
 
 	if connIdeate, err := newConn(defaultHost, maxSizeOptions); err != nil {
-		alog.Errorf(ctx, "failed to connect to ideate: %v", err)
 		return nil, err
 	} else {
 		return NewBuildServiceClient(connIdeate), nil
