@@ -3,7 +3,7 @@
 // Source: alis/build/build.proto
 // Plugin version: v0.0.1
 //
-// Generated on: 2026-02-26 14:33:50 UTC
+// Generated on: 2026-02-27 14:16:01 UTC
 
 package build
 
